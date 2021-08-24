@@ -60,7 +60,9 @@ button {
 }
 
 #result {
-    text-align: center;
+    font-size: medium;
+    font-weight: bold;
     margin-top: 20px;
+    color: #B45309;
     padding: 20px;
 }
