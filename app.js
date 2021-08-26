@@ -1,6 +1,21 @@
 var birthDate = document.querySelector("#birth-date");
 var check = document.querySelector("#btn");
 var outputText = document.querySelector("#result");
+var yasimg = document.querySelector("#yasimg");
+var oopsimg = document.querySelector("#oopsimg");
+
+
+hide(yasimg);
+hide(oopsimg);
+
+
+function show(input, typ) {
+    input.style.display = typ;
+}
+
+function hide(input) {
+    input.style.display = "none";
+}
 
 function reversestr(s) {
     var rev = s.split('').reverse().join('');
@@ -196,11 +211,15 @@ check.addEventListener("click", function check() {
         console.log(date);
         var isPal = checkPalindromes(date);
         if (isPal) {
-            outputText.innerText = "Your birthday is palindrome"
+            outputText.innerText = "Your Birthday is Palindrome"
+            show(yasimg, "block");
+            hide(oopsimg);
         } else {
             var [c, nex] = comp(date);
-            console.log(c);
-            outputText.innerText = "Oops!😞 Your birthday is not a palindrome date! " + "\n" + "You missed  it by " + c + " days. " + "\n" + "Nearest date was " + nex.day + "-" + nex.month + "-" + nex.year;
+
+            outputText.innerText = "Oops! Your Birthday is not a Palindrome date! " + "\n" + "You missed  it by " + c + " days. " + "\n" + "Nearest date was " + nex.day + "-" + nex.month + "-" + nex.year;
+            show(oopsimg, "block");
+            hide(yasimg);
         }
 
     }

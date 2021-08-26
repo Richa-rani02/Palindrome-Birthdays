@@ -2,6 +2,7 @@
 body {
     background-color: var(--primary-color);
     font-family: 'Montserrat', sans-serif;
+    text-align: center;
 }
 
 :root {
@@ -60,9 +61,45 @@ button {
 }
 
 #result {
-    font-size: medium;
+    font-size: large;
     font-weight: bold;
     margin-top: 20px;
     color: #B45309;
     padding: 20px;
+}
+
+img {
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+    height: 200px;
+}
+
+.footer-icons {
+    margin-top: 40px;
+}
+
+.footer-icons a {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    background-color: #33383b;
+    border-radius: 2px;
+    font-size: 20px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 35px;
+    margin-right: 3px;
+    margin-bottom: 5px;
+}
+
+.list-non-bullet {
+    list-style: none;
+    padding-inline-start: 0px;
+}
+
+.list-item-inline {
+    display: inline;
+    padding: 0rem 0.5rem;
 }
