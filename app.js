@@ -1,13 +1,15 @@
-var birthDate = document.querySelector("#birth-date");
+var birthDateInput = document.querySelector("#birth-date");
 var check = document.querySelector("#btn");
 var outputText = document.querySelector("#result");
-var outputnext = document.querySelector("#resultnext");
+var outputNext = document.querySelector("#resultnext");
+var resultheading = document.querySelector("#resultheading");
 var yasimg = document.querySelector("#yasimg");
 var oopsimg = document.querySelector("#oopsimg");
 
 
 hide(yasimg);
 hide(oopsimg);
+hide(resultheading);
 
 
 function show(input, typ) {
@@ -115,28 +117,31 @@ function getNextDate(date) {
         year++;
     }
 
-    date.day = day;
-    date.month = month;
-    date.year = year;
+    return {
+        day: day,
+        month: month,
+        year: year
+    }
+
 
 }
 
 
 
 function getNextPalinDate(date) {
-    var ctr = 0;
-    getNextDate(date);
-    console.log(date);
+    var daysRemaining = 0;
+    var nextDate = getNextDate(date);
+
     while (1) {
-        ctr++;
-        var ispa = checkPalindromes(date);
+        daysRemaining++;
+        var ispa = checkPalindromes(nextDate);
 
         if (ispa) {
             break;
         }
-        getNextDate(date);
+        nextDate = getNextDate(nextDate);
     }
-    return [ctr, date];
+    return [daysRemaining, nextDate];
 }
 
 
@@ -172,23 +177,28 @@ function getprevDate(date) {
         month = 12;
         year--;
     }
-    date.day = day;
-    date.month = month;
-    date.year = year;
+    return {
+        day: day,
+        month: month,
+        year: year
+    }
+
 }
 
 function getPrePalinDate(date) {
-    var c = 0;
-    getprevDate(date);
+    var daysPending = 0;
+    var previousDate = getprevDate(date);
     while (1) {
-        c++;
-        var isPalind = checkPalindromes(date, c);
+        daysPending++;
+        var isPalind = checkPalindromes(previousDate);
         if (isPalind) {
             break;
         }
-        getprevDate(date);
+
+        previousDate = getprevDate(previousDate);
     }
-    return [c, date];
+    return [daysPending, previousDate];
+
 }
 
 function comp(date) {
@@ -201,24 +211,31 @@ function comp(date) {
     }
 }
 check.addEventListener("click", function check() {
-    var strbday = birthDate.value;
+    var strbday = birthDateInput.value;
     if (strbday != "") {
         var listDates = strbday.split('-');
-        var date = {
-            day: Number(listDates[2]),
-            month: Number(listDates[1]),
-            year: Number(listDates[0]),
-        }
-        console.log(date);
-        var isPal = checkPalindromes(date);
+        var birthDate = {
+                day: Number(listDates[2]),
+                month: Number(listDates[1]),
+                year: Number(listDates[0]),
+            }
+            // console.log(date);
+        var isPal = checkPalindromes(birthDate);
         if (isPal) {
             outputText.innerText = "Your Birthday is Palindrome"
+            hide(outputNext);
+            hide(resultheading);
             show(yasimg, "block");
             hide(oopsimg);
         } else {
-            var [c, nex] = comp(date);
 
-            outputText.innerText = "Oops! Your Birthday is not a Palindrome date! " + "\n" + "You missed  it by " + c + " days. " + "\n" + "Nearest date was " + nex.day + "-" + nex.month + "-" + nex.year;
+            var [daysPending, previousDate] = getPrePalinDate(birthDate);
+            var [daysRemaining, nextDate] = getNextPalinDate(birthDate);
+            console.log(nextDate.day);
+            show(resultheading, "block");
+            show(outputNext, "block");
+            outputNext.innerText = `You missed it by ${daysRemaining} days.Next palindrome date is ${nextDate.day}-${nextDate.month}-${nextDate.year} `;
+            outputText.innerText = `You missed it by ${daysPending} days. Previous palindrome date was ${previousDate.day}-${previousDate.month}-${previousDate.year} `;
             show(oopsimg, "block");
             hide(yasimg);
         }

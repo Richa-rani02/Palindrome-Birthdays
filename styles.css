@@ -60,11 +60,27 @@ button {
     width: 20%;
 }
 
-#result {
+#resultheading {
     font-size: large;
     font-weight: bold;
     margin-top: 20px;
     color: #B45309;
+    padding: 20px;
+}
+
+#result {
+    font-size: medium;
+    font-weight: bold;
+    margin-top: 2px;
+    color: Tomato;
+    padding: 20px;
+}
+
+#resultnext {
+    font-size: medium;
+    font-weight: bold;
+    margin-top: 0.5px;
+    color: Tomato;
     padding: 20px;
 }
 
