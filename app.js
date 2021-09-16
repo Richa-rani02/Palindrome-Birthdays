@@ -1,6 +1,7 @@
 var birthDate = document.querySelector("#birth-date");
 var check = document.querySelector("#btn");
 var outputText = document.querySelector("#result");
+var outputnext = document.querySelector("#resultnext");
 var yasimg = document.querySelector("#yasimg");
 var oopsimg = document.querySelector("#oopsimg");
 
